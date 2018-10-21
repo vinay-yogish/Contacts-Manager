@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
@@ -108,11 +107,55 @@
                         <i class="material-icons icon-delete">delete</i>
                     </div>
                 </li>
-                
             </ul>
-
         </div>
+    </div>
 
+    <div class="modal-box"></div>
+
+    <div class="input-dialog">
+        <form class="input-form">
+            <input type="text" class="input-box input-fullname" placeholder="Fullname" required>
+            <input type="text" class="input-box input-profession" placeholder="Profession" required>
+            <input type="text" class="input-box input-email" placeholder="Email" required>
+            <input type="text" class="input-box input-phone" placeholder="Phone" required>
+            <input type="text" class="input-box input-address" placeholder="Address" required>
+            <input type="submit" value="+" class="add-contact__btn">
+        </form>
+    </div>
+
+    <div class="contact-info__container">
+        <i class="material-icons cancel-icon">cancel</i>
+        <div class="contact-info">
+            <div class="contact-info__box">
+                <i class="material-icons contact-info__icon">account_box</i>
+                <p class="contact-info__text contact-info__name">John Doe</p>
+            </div>
+
+            <div class="contact-info__box">
+                <i class="material-icons contact-info__icon">work</i>
+                <p class="contact-info__text contact-info__name">Developer</p>
+            </div>
+
+            <div class="contact-info__box">
+                <i class="material-icons contact-info__icon">markunread</i>
+                <p class="contact-info__text contact-info__name">john@gmail.com</p>
+            </div>
+
+            <div class="contact-info__box">
+                <i class="material-icons contact-info__icon">settings_phone</i>
+                <p class="contact-info__text contact-info__name">773-656-4461</p>
+            </div>
+
+            <div class="contact-info__box">
+                <i class="material-icons contact-info__icon">place</i>
+                <p class="contact-info__text contact-info__name">2108, Point Street,
+                        Chicago, Illinois(IL), 
+                        60629</p>
+            </div>
+
+            <button class="close-btn">Close</button>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

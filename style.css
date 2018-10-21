@@ -26,7 +26,7 @@ body {
 .container {
     height: 500px;
     width: 60rem;
-    margin-top: 4rem;
+    margin: 4rem auto;
 }
 
 /* Header */
@@ -113,7 +113,7 @@ body {
 .check-box {
     width: 2rem;
     height: 2rem;
-    border: 3px solid var(--color-seconday);
+    border: 2px solid var(--color-seconday);
     border-radius: 3px;
     display: inline-block;
     position: relative;
@@ -189,6 +189,169 @@ body {
 
 .icon-delete {
     margin-left: 0;
+}
+
+
+/* Modal */
+.modal-box {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 100;
+    display: none;
+}
+
+/* Input Box */
+.input-dialog {
+    position: fixed;
+    width: 40rem;
+    height: 50rem;
+    background-color: var(--color-white);
+    z-index: 101;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 10px 99px rgba(0, 0, 0, .75);
+    display: none;
+}
+
+/* Inputs */
+.input-form {
+    padding: 8rem 5rem;
+}
+
+.input-box {
+    width: 100%;
+    height: 4rem;
+    margin-bottom: 1.7rem;
+    font-family: 'Open Sans', sans-serif !important;
+    color: var(--color-seconday);
+    letter-spacing: .5px;
+    border: 1px solid var(--color-grey);
+    text-align: center;
+}
+
+.input-box::placeholder {
+    color: var(--color-grey);
+    letter-spacing: .5px;
+}
+
+.input-box:focus {
+    outline: none;
+}
+
+.add-contact__btn {
+    width: 100%;
+    height: 4rem;
+    background-color: var(--color-primary);
+    border: none;
+    color: var(--color-white);
+    font-size: 3.6rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, .6);
+    transition: all .3s;
+}
+
+.add-contact__btn:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, .6);
+}
+
+.add-contact__btn:active {
+    transform: translateY(0px);
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, .6);
+}
+
+.add-contact__btn:focus {
+    outline: none;
+}
+
+
+/* Contact Info*/
+.contact-info__container {
+    position: fixed;
+    width: 30rem;
+    height: 40rem;
+    background-color: var(--color-white);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 101;
+    box-shadow: 0px 20px 99px rgba(0, 0, 0, .75);
+    display: none;
+}
+
+.contact-info {
+    width: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.contact-info__box {
+    width: 100%;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.contact-info__icon {
+    display: inline-block;
+    font-size: 2.4rem;
+    margin-right: 1rem;
+    color: var(--color-primary);
+}
+
+.contact-info__icon:hover {
+    cursor: default;
+}
+
+.contact-info__text {
+    display: inline-block;
+    font-size: 1.4rem;
+    color: var(--color-seconday);
+}
+
+.close-btn {
+    width: 100%;
+    height: 3.5rem;
+    border: none;
+    margin-top: 1rem;
+    background-color: var(--color-primary);
+    font-family: 'Open Sans', sans-serif !important;
+    font-weight: 600;
+    color: var(--color-white);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, .5);
+    transition: all .3s;
+}
+
+.close-btn:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    box-shadow: 0px 7px 25px rgba(0, 0, 0, .5);
+}
+
+.close-btn:focus {
+    outline: none;
+}
+
+.close-btn:active {
+    transform: translateY(0px);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, .5);
+}
+
+.cancel-icon {
+    position: absolute;
+    font-size: 2rem;
+    top: 2rem;
+    right: 2rem;
+    color: var(--color-primary);
 }
 
 /* Utilities */
