@@ -39,6 +39,7 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, .5);
 }
 
 .header_text {
@@ -64,6 +65,10 @@ body {
     margin-right: .7rem;
 }
 
+.material-icons:hover {
+    cursor: pointer;
+}
+
 /* Body */
 .body {
     width: 100%;
@@ -82,5 +87,92 @@ body {
 .contacts-list__item {
     height: 5rem;
     margin-bottom: 3rem;
-    background-color: crimson;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
+    transition: all .3s;
+}
+
+.contacts-list__item:hover {
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, .5);
+    transform: translateY(-.2rem);
+}
+
+/* check box */
+
+.check-box {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid var(--color-seconday);
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+    transform: translateX(2rem);
+}
+
+.check-box:hover {
+    cursor: pointer;
+}
+
+.icon-check {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: 700;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.icon-check {
+    cursor: pointer;
+}
+
+/* Contact name and profession */
+.contact-text {
+    display: inline-block;
+    width: 70%;
+    text-align: center;
+    transform: translateX(2rem);
+}
+
+.contact-name {
+    font-size: 2.2rem;
+    color: var(--color-seconday);
+    font-weight: 600;
+    display: inline-block;
+    padding: 0;
+    margin: 0 1rem 0 0;
+}
+
+.contact-profession {
+    font-size: 1.5rem;
+    color: var(--color-seconday);
+    display: inline-block;
+}
+
+.contact-name:hover, .contact-profession:hover {
+    cursor: pointer;
+}
+
+/* Contact Icons */
+.contact-icons {
+    display: inline-block;
+    padding: .5rem 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(1.2rem);
+}
+
+.icon-edit, .icon-delete {
+    padding: 0;
+    margin: 0;
+}
+
+.icon-edit {
+    margin-right: 1rem;
 }
