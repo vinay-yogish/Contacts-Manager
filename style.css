@@ -54,7 +54,6 @@ body {
 
 .header-icons {
     color: var(--color-white);
-    margin-top: .6rem;
     position: absolute;
     right: 0;
     margin-right: 1rem;
@@ -67,6 +66,10 @@ body {
 
 .material-icons:hover {
     cursor: pointer;
+}
+
+.icon-delete-selected {
+    display: none;
 }
 
 /* Body */
@@ -92,11 +95,17 @@ body {
     align-items: center;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, .5);
     transition: all .3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .contacts-list__item:hover {
     box-shadow: 0px 5px 30px rgba(0, 0, 0, .5);
     transform: translateY(-.2rem);
+}
+.contacts-list__item:hover .contact-icons {
+    display: inline-block;
+    transform: translateX(0%);
 }
 
 /* check box */
@@ -109,6 +118,8 @@ body {
     display: inline-block;
     position: relative;
     transform: translateX(2rem);
+    position: absolute;
+    left: 2rem;
 }
 
 .check-box:hover {
@@ -122,18 +133,23 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    display: none;
 }
 
-.icon-check {
+.icon-check:hover {
     cursor: pointer;
+}
+
+.check-box, .icon-check {
+    z-index: 10;
 }
 
 /* Contact name and profession */
 .contact-text {
     display: inline-block;
-    width: 70%;
+    width: 100%;
     text-align: center;
-    transform: translateX(2rem);
+    position: absolute;
 }
 
 .contact-name {
@@ -158,21 +174,25 @@ body {
 /* Contact Icons */
 .contact-icons {
     display: inline-block;
-    padding: .5rem 1rem;
     background-color: var(--color-primary);
     color: var(--color-white);
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translateX(1.2rem);
+    position: absolute;
+    right: 0;
+    transform: translateX(100%);
+    transition: all .2s;
 }
 
 .icon-edit, .icon-delete {
-    padding: 0;
-    margin: 0;
+    margin: 1rem;
 }
 
-.icon-edit {
-    margin-right: 1rem;
+.icon-delete {
+    margin-left: 0;
+}
+
+/* Utilities */
+
+.show {
+    display: inline-block;
 }
