@@ -132,7 +132,7 @@ const renderContact = (contact) => {
         </li>
     `;
 
-    /**Insert into the DOM */
+    /**Insert into the DOM  */
     contactList.insertAdjacentHTML('beforeend', markup);
 };
 
