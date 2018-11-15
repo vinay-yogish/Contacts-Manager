@@ -29,6 +29,7 @@
   const contactList = document.querySelector('.contacts-list');
   const closeIcon = document.querySelector('.close-icon');
   const closeBtn = document.querySelector('.close-btn');
+  const editIcon = document.querySelector('.icon-edit');
 
   /** From Elements */
   const inputFullName = document.querySelector('.input-fullname');
@@ -58,22 +59,28 @@
   /** Handle icon-add btn*/
 iconAdd.addEventListener('click', (e) => {
     showInputForm();
+    inputForm.dataset.mode = 'add';
 });
 
 /** Handle add contact form */
 inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    /**Get inputs and save the contact */
-    const contact = getInputs();
-    saveContact(contact);
+    if (inputForm.dataset.mode === 'add') {
+         /**Get inputs and save the contact */
+        const contact = getInputs();
+        saveContact(contact);
 
-    /**clear all the input fields and close the input-field dialog */
-    clearInputs();
-    closeInputForm();
-    
-    /**Render the contact in the contact list */
-    renderContact(contact);
+        /**clear all the input fields and close the input-field dialog */
+        clearInputs();
+        closeInputForm();
+        
+        /**Render the contact in the contact list */
+        renderContact(contact);
+
+        inputForm.dataset.mode = '';
+    }
+
 });
 
 /**Close the modal when it is clicked */
@@ -84,6 +91,9 @@ modalBox.addEventListener('click', (e) => {
 
  const showInputForm = () => {
     /** show modal and input dialog to accept contact details */
+
+    closeBtn.textContent = 'Close';
+
     modalBox.classList.toggle('show');
     inputDialog.classList.toggle('show');
  };
@@ -100,12 +110,12 @@ const getInputs = () => {
     contact.email = inputEmail.value;
     contact.phone = inputPhone.value;
     contact.address = inputAddress.value;
-    contact.id = generateID();
 
     return contact;
 };
 
 const saveContact = (contact) => {
+    contact.id = generateID();
     state.contacts.push(contact);
 };
 
@@ -184,12 +194,18 @@ contactList.addEventListener('click', (e) => {
 });
 
 /** Handle the close buttons */
-closeIcon.addEventListener('click', (e) => {
-    closeAll();
-});
+// closeIcon.addEventListener('click', (e) => {
+//     closeAll();
+// });
 
-closeBtn.addEventListener('click', (e) => {
-    closeAll();
+// closeBtn.addEventListener('click', (e) => {
+//     closeAll();
+// });
+
+contactInfoContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('close-btn') || e.target.classList.contains('close-icon')) {
+        closeAll();
+    }
 });
 
 const getContact = (id) => {
@@ -211,4 +227,65 @@ const renderContactInfo = () => {
     /** Render modal & contact info card */
     modalBox.classList.toggle('show');
     contactInfoContainer.classList.toggle('show');
+};
+
+
+ /***********************************************
+  *      3. Edit each contact details           *
+  * *********************************************/
+contactList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('icon-edit')) {
+        
+        inputForm.dataset.mode = 'edit';
+
+        const contactItem = e.target.closest('.contacts-list__item');
+        const contact = getContact(contactItem.dataset.id);
+        
+        setInputFields(contact);
+        showInputForm();
+        inputFullName.select();
+
+        window.id = contact.id;
+    }
+});
+
+inputForm.addEventListener('submit', (e) => {
+    if (inputForm.dataset.mode === 'edit') {
+        const editedContact = getInputs();
+
+        console.log(window.id, editedContact);
+        saveEditedContact(window.id, editedContact);
+        renderEditedContact();
+
+        window.id = undefined;
+        inputForm.dataset.mode = '';
+        closeAll();
+    }
+});
+
+const setInputFields = (contact) => {
+    inputFullName.value = contact.fullName;
+    inputProfession.value = contact.profession;
+    inputEmail.value = contact.email;
+    inputPhone.value = contact.phone;
+    inputAddress.value = contact.address;
+};
+
+const saveEditedContact = (id, editedContact) => {
+    state.contacts.forEach( (contact) => {
+        if (contact.id === id) {
+            contact.fullName = editedContact.fullName;
+            contact.profession = editedContact.profession;
+            contact.email = editedContact.email;
+            contact.phone = editedContact.phone;
+            contact.address = editedContact.address;
+        }
+    });
+};
+
+const renderEditedContact = () => {
+    contactList.innerHTML = '';
+    state.contacts.forEach( (contact) => {
+        renderContact(contact);
+    });
 };
