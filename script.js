@@ -77,6 +77,10 @@ modalBox.addEventListener('click', (e) => {
     inputDialog.classList.toggle('show');
  };
 
+ const generateID = () => {
+     return new Date().valueOf();
+ }
+
 const getInputs = () => {
     const contact = {};
 
@@ -85,6 +89,7 @@ const getInputs = () => {
     contact.email = inputEmail.value;
     contact.phone = inputPhone.value;
     contact.address = inputAddress.value;
+    contact.id = generateID();
 
     return contact;
 };
@@ -110,7 +115,7 @@ const renderContact = (contact) => {
 
     /**Construct the html markup for contact */
     const markup = `
-        <li class="contacts-list__item">
+        <li class="contacts-list__item" data-id=${contact.id}>
             <div class="check-box">
                 <i class="material-icons icon-check">check</i>
             </div>
