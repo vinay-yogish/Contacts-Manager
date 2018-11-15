@@ -1,4 +1,6 @@
 /**
+ * Tasks
+ * 
  * 1. Add new contact
  * 2. View contacts list
  * 3. View each contact details
@@ -9,6 +11,7 @@
 
  /**
   * Data :-
+  * 
   * 1. fullname
   * 2. profession
   * 3. email
@@ -24,6 +27,8 @@
   const addContactBtn = document.querySelector('.add-contact__btn');
   const inputForm = document.querySelector('.input-form');
   const contactList = document.querySelector('.contacts-list');
+  const closeIcon = document.querySelector('.close-icon');
+  const closeBtn = document.querySelector('.close-btn');
 
   /** From Elements */
   const inputFullName = document.querySelector('.input-fullname');
@@ -31,13 +36,24 @@
   const inputEmail = document.querySelector('.input-email');
   const inputPhone = document.querySelector('.input-phone');
   const inputAddress = document.querySelector('.input-address');
+
+  /** Contact Info Elements */
+  const contactName = document.querySelector('.contact-info__name');
+  const contactProfession = document.querySelector('.contact-info__profession');
+  const contactEmail = document.querySelector('.contact-info__email');
+  const contactPhone = document.querySelector('.contact-info__phone');
+  const contactAddress = document.querySelector('.contact-info__address');
   
 
  const state = {};
  
  state.contacts = [];
 
- /**1. Add new contact & 2. View contacts list */
+
+ /***********************************************
+  * 1. Add new contact & 2. View contacts list  *
+  * *********************************************/
+
 
   /** Handle icon-add btn*/
 iconAdd.addEventListener('click', (e) => {
@@ -62,13 +78,8 @@ inputForm.addEventListener('submit', (e) => {
 
 /**Close the modal when it is clicked */
 modalBox.addEventListener('click', (e) => {
-    modalBox.classList.toggle('show');
-
-    if(inputDialog.classList.contains('show'))
-        inputDialog.classList.toggle('show');
-    
-    if(contactInfoContainer.classList.contains('show'))
-        contactInfoContainer.classList.toggle('show');
+    closeAll();
+    clearInputs();
 });
 
  const showInputForm = () => {
@@ -136,6 +147,68 @@ const renderContact = (contact) => {
     contactList.insertAdjacentHTML('beforeend', markup);
 };
 
+const closeAll = () => {
+    modalBox.classList.toggle('show');
+
+    if(inputDialog.classList.contains('show'))
+        inputDialog.classList.toggle('show');
+    
+    if(contactInfoContainer.classList.contains('show'))
+        contactInfoContainer.classList.toggle('show');
+};
 
 
 
+ /***********************************************
+  *      3. View each contact details           *
+  * *********************************************/
+
+contactList.addEventListener('click', (e) => {
+    if (e.target.className === 'contact-name' || e.target.className === 'contact-profession') {
+
+        /**Get the contact item from the list */
+        const contactItem = e.target.closest('.contacts-list__item')
+        
+        /** Get the id of the element */
+        const id = contactItem.dataset.id;
+        console.log(id);
+
+        /**Get the contact details */
+        const contact = getContact(id);
+        console.log(contact);
+
+        /** Render the contact details */
+        editContactInfo(contact);
+        renderContactInfo();
+    }
+});
+
+/** Handle the close buttons */
+closeIcon.addEventListener('click', (e) => {
+    closeAll();
+});
+
+closeBtn.addEventListener('click', (e) => {
+    closeAll();
+});
+
+const getContact = (id) => {
+    return state.contacts.find( (contact) => {
+        return contact.id == id;
+    })
+};
+
+
+const editContactInfo = (contact) => {
+    contactName.textContent = contact.fullName;
+    contactProfession.textContent = contact.profession;
+    contactEmail.textContent = contact.email;
+    contactPhone.textContent = contact.phone;
+    contactAddress.textContent = contact.address;
+};
+
+const renderContactInfo = () => {
+    /** Render modal & contact info card */
+    modalBox.classList.toggle('show');
+    contactInfoContainer.classList.toggle('show');
+};
