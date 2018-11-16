@@ -5,7 +5,7 @@
  * 2. View contacts list
  * 3. View each contact details
  * 4. Edit each contact details
- * 5. Remove single and all contacts
+ * 5. Remove contacts
  * 6. Persist Data
  */
 
@@ -255,7 +255,7 @@ inputForm.addEventListener('submit', (e) => {
 
         console.log(window.id, editedContact);
         saveEditedContact(window.id, editedContact);
-        renderEditedContact();
+        renderAllContacts();
 
         window.id = undefined;
         inputForm.dataset.mode = '';
@@ -283,9 +283,33 @@ const saveEditedContact = (id, editedContact) => {
     });
 };
 
-const renderEditedContact = () => {
+const renderAllContacts = () => {
     contactList.innerHTML = '';
     state.contacts.forEach( (contact) => {
         renderContact(contact);
     });
+};
+
+
+/***********************************************
+*           5. Remove contacts                 *
+************************************************/
+
+/** Remove single contact item */
+
+contactList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('icon-delete')) {
+        const contactItem = e.target.closest('.contacts-list__item');
+        const id = contactItem.dataset.id;
+
+        console.log(`removing contact with id : ${id}`);
+        removeContact(id);
+        renderAllContacts();
+    }
+});
+
+
+const removeContact = (id) => {
+    const newContactsList = state.contacts.filter((contact) => contact.id != id);
+    state.contacts = newContactsList;
 };
