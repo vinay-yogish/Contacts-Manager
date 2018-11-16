@@ -30,6 +30,8 @@
   const closeIcon = document.querySelector('.close-icon');
   const closeBtn = document.querySelector('.close-btn');
   const editIcon = document.querySelector('.icon-edit');
+  const contactItems = document.querySelectorAll('.contacts-list__item');
+  const iconDeleteSeleted = document.querySelector('.icon-delete-selected');
 
   /** From Elements */
   const inputFullName = document.querySelector('.input-fullname');
@@ -305,6 +307,7 @@ contactList.addEventListener('click', (e) => {
         console.log(`removing contact with id : ${id}`);
         removeContact(id);
         renderAllContacts();
+        handleDeleteIcon();
     }
 });
 
@@ -312,4 +315,89 @@ contactList.addEventListener('click', (e) => {
 const removeContact = (id) => {
     const newContactsList = state.contacts.filter((contact) => contact.id != id);
     state.contacts = newContactsList;
+};
+
+
+contactList.addEventListener('click', (e) => {
+    if (e.target.classList.contains('check-box') || e.target.classList.contains('icon-check')) {
+        const contactItem = e.target.closest('.contacts-list__item');
+        const checkBoxIcon = contactItem.children[0].children[0];
+        checkBoxIcon.classList.toggle('show');
+
+        console.log('working...');
+        handleDeleteIcon();
+    }
+});
+
+
+/** Remove the seleted contacts */
+iconDeleteSeleted.addEventListener('click', (e) => {
+    /** Get all the seleted Items */
+    const selectedContacts = getSeletedItems();
+
+
+    console.log(selectedContacts);
+
+    /** Remove the seleted items */
+    selectedContacts.forEach((contact) => {
+        removeContact(contact.dataset.id);
+    });
+
+    renderAllContacts();
+    handleDeleteIcon();
+});
+
+const handleDeleteIcon = () => {
+
+    console.log(isContactItemChecked());
+    
+    if(isContactItemChecked()) {
+        if(!iconDeleteSeleted.classList.contains('show')) {
+            /** Render the delete icon */
+            renderDeleteIcon();
+        }
+    } else {
+        /** Hide the delete icon */
+        hideDeleteIcon();
+    }
+
+    const contactItemsRendered = document.querySelectorAll('.contacts-list__item');
+
+        console.log(contactItemsRendered.length);
+
+        if(contactItemsRendered.length === 0) {
+            hideDeleteIcon();
+        }
+};
+
+const renderDeleteIcon = () => {
+    iconDeleteSeleted.classList.add('show');
+};
+
+const hideDeleteIcon = () => {
+    iconDeleteSeleted.classList.remove('show');
+}
+
+const isContactItemChecked = () => {
+    const contactItems = document.querySelectorAll('.contacts-list__item');
+    const contactsItemArray = Array.from(contactItems);
+
+    const checkedItems = contactsItemArray.filter( (contactItem) => {
+        return contactItem.children[0].children[0].classList.contains('show');
+    });
+
+    if(checkedItems.length > 0)
+        return true;
+    else
+        return false;
+};
+
+const getSeletedItems = () => {
+    const contactItems = document.querySelectorAll('.contacts-list__item');
+    const contactItemsArray = Array.from(contactItems);
+    const contactItemsSeleted = contactItemsArray.filter((contactItem) => {
+        return contactItem.children[0].children[0].classList.contains('show');
+    });
+
+    return contactItemsSeleted;
 };
