@@ -62,6 +62,8 @@
 iconAdd.addEventListener('click', (e) => {
     showInputForm();
     inputForm.dataset.mode = 'add';
+    addContactBtn.setAttribute('value', '+');
+    clearInputs();
 });
 
 /** Handle add contact form */
@@ -195,14 +197,6 @@ contactList.addEventListener('click', (e) => {
     }
 });
 
-/** Handle the close buttons */
-// closeIcon.addEventListener('click', (e) => {
-//     closeAll();
-// });
-
-// closeBtn.addEventListener('click', (e) => {
-//     closeAll();
-// });
 
 contactInfoContainer.addEventListener('click', (e) => {
     if (e.target.classList.contains('close-btn') || e.target.classList.contains('close-icon')) {
@@ -237,7 +231,7 @@ const renderContactInfo = () => {
   * *********************************************/
 contactList.addEventListener('click', (e) => {
     if (e.target.classList.contains('icon-edit')) {
-        
+        addContactBtn.setAttribute('value', 'Update');
         inputForm.dataset.mode = 'edit';
 
         const contactItem = e.target.closest('.contacts-list__item');
