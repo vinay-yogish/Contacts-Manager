@@ -52,6 +52,22 @@
  
  state.contacts = [];
 
+ /** Retrieve the persisted data if it is exists */
+
+ window.addEventListener('load', (e) => {
+    if(localStorage.contacts) {
+
+        let contacts = JSON.parse(localStorage.contacts);
+
+        if(contacts.length > 0) {
+            /** Restore all the contacts */
+            state.contacts = contacts;
+            renderAllContacts();
+        }
+    }
+  
+ });
+
 
  /***********************************************
   * 1. Add new contact & 2. View contacts list  *
@@ -395,3 +411,9 @@ const getSeletedItems = () => {
 
     return contactItemsSeleted;
 };
+
+/** 6. Persist Data */
+
+window.addEventListener('beforeunload', (e) => {
+    localStorage.setItem('contacts', JSON.stringify(state.contacts));
+});
